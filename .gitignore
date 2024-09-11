@@ -1,3 +1,59 @@
 ecommerce-anselmo07/node_modules/
 ecommerce-anselmo07/dist/
 ecommerce-anselmo07/.env
+
+ecommerce-anselmo07/src/Auth
+
+ecommerce-anselmo07/build/
+
+# Logs
+ecommerce-anselmo07/logs/
+ecommerce-anselmo07/*.log
+ecommerce-anselmo07/npm-debug.log*
+ecommerce-anselmo07/pnpm-debug.log*
+ecommerce-anselmo07/yarn-debug.log*
+ecommerce-anselmo07/yarn-error.log*
+ecommerce-anselmo07/lerna-debug.log*
+
+# OS
+ecommerce-anselmo07/.DS_Store
+
+# Tests
+ecommerce-anselmo07/coverage/
+ecommerce-anselmo07/.nyc_output/
+
+# IDEs and editors
+ecommerce-anselmo07/.idea/
+ecommerce-anselmo07/.project
+ecommerce-anselmo07/.classpath
+ecommerce-anselmo07/.c9/
+ecommerce-anselmo07/*.launch
+ecommerce-anselmo07/.settings/
+ecommerce-anselmo07/*.sublime-workspace
+
+# IDE - VSCode
+ecommerce-anselmo07/.vscode/*
+ecommerce-anselmo07/.vscode/settings.json
+ecommerce-anselmo07/.vscode/tasks.json
+ecommerce-anselmo07/.vscode/launch.json
+ecommerce-anselmo07/.vscode/extensions.json
+
+# dotenv environment variable files
+ecommerce-anselmo07/.env
+ecommerce-anselmo07/.env.development.local
+ecommerce-anselmo07/.env.test.local
+ecommerce-anselmo07/.env.production.local
+ecommerce-anselmo07/.env.local
+
+# temp directory
+ecommerce-anselmo07/.temp/
+ecommerce-anselmo07/.tmp/
+
+# Runtime data
+ecommerce-anselmo07/pids/
+ecommerce-anselmo07/*.pid
+ecommerce-anselmo07/*.seed
+ecommerce-anselmo07/*.pid.lock
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+ecommerce-anselmo07/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
