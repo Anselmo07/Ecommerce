@@ -2,8 +2,7 @@ ecommerce-anselmo07/node_modules/
 ecommerce-anselmo07/dist/
 ecommerce-anselmo07/.env
 
-ecommerce-anselmo07/src/Auth
-
+node_modules
 ecommerce-anselmo07/build/
 
 # Logs
