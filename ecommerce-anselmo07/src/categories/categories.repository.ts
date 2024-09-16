@@ -1,6 +1,5 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { promises } from "dns";
 import { categories } from "src/entity/categories.entity";
 import { Repository } from "typeorm";
 
@@ -14,6 +13,7 @@ export class categoriesRepository{
     }
 
     async addCategories(newCategories: categories[]): Promise<void> {
+        
         for (const categories of newCategories) {
             const categoriesCount = await this.categories.count({ where: { name: categories.name } });
 

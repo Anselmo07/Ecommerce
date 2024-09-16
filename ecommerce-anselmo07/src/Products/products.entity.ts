@@ -20,7 +20,7 @@ export class Products{
     @Column({ type: 'int', nullable: false })
     stock: number;
 
-    @Column({ type: 'varchar', default: 'default-image-url' })
+    @Column({ type: 'varchar', default: 'default-image-url', nullable: true })
     imgUrl: string;
 
     @ManyToOne(() => categories, (category) => category.products)

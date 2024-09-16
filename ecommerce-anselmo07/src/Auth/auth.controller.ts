@@ -1,6 +1,7 @@
 import { BadRequestException, Body, Controller, Get, Post, UnauthorizedException } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { throwError } from "rxjs";
+import { LoginUserDto } from "src/DTO/LoginUserDto";
 
 @Controller("auth")
 export class AuthController{
@@ -12,7 +13,7 @@ export class AuthController{
     }
 
     @Post('signin')
-    async postAuth(@Body () body:{email: string, password: string}){
+    async postAuth(@Body () body:LoginUserDto){
         const {email, password} = body;
 
         if(!email || !password ){

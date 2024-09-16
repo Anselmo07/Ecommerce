@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseGuards, Q
 import { UsersService } from "./users.service";
 import { AuthGuard } from "src/Auth/auth.guard";
 import { Users } from "./users.entity";
+import { CreateUserDto } from "src/DTO/CreateUserDto";
 
 @Controller("users")
 export class UsersController {
@@ -26,14 +27,14 @@ export class UsersController {
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
-    createUsers(@Body() user: Users): Promise<Users>{
+    createUsers(@Body() user: CreateUserDto ): Promise<Users>{
         return this.usersService.createUsers(user);
     }
 
     @Put(':id')
-    @UseGuards(AuthGuard)
-    updateUsers(@Param('id')id: string , @Body() user: Users){
-        return this.usersService.updateUsers(Number(id), user);
+    // @UseGuards(AuthGuard)
+    updateUsers(@Param('id')id: string , @Body() user: CreateUserDto):Promise<Users>{
+        return this.usersService.updateUsers(String(id), user);
     }
 
     @Delete(':id')

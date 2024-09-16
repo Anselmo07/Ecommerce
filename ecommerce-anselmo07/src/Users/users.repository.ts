@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Users } from "./users.entity";
 import { Repository } from "typeorm";
 import { Orders } from "src/entity/orders.entity";
+import { CreateUserDto } from "src/DTO/CreateUserDto";
 
 @Injectable()
 export class UsersRepository {
@@ -48,12 +49,12 @@ export class UsersRepository {
         };
     }
 
-    async createUsers(user: Users):Promise<Users> {
+    async createUsers(user: CreateUserDto):Promise<Users> {
         const newUser = this.usersRepository.create(user);
         return this.usersRepository.save(newUser);
     }
 
-    async UpdateUsers(id: number, user: Users):Promise<Users>{
+    async UpdateUsers(id: string, user: CreateUserDto):Promise<Users>{
         const buscarId = await this.usersRepository.preload({id, ...user,});
         
         if (!buscarId) {

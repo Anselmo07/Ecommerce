@@ -56,21 +56,3 @@ export class OrdersRepository{
         return order;
     }
 }
-
-
-
-// @Injectable()
-// export class OrdersRepository{
-//     constructor(@InjectRepository(Orders) 
-//     private readonly ordersRepository: Repository<Orders>){}
-
-//     async getOrders(orderId: string): Promise<Orders>{
-//         return await this.ordersRepository.findOne({where:{id:orderId}});
-//     }
-
-
-//     async addOrders(order: Orders): Promise <Orders>{
-//         const newOrders = this.ordersRepository.create(order);
-//         return await this.ordersRepository.save(newOrders);
-//     }
-// }

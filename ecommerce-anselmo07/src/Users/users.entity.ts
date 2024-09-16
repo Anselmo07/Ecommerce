@@ -29,5 +29,8 @@ export class Users {
     city: string;
 
     @OneToMany(() => Orders, (order)=> order.user_id)
-    orders_id: Orders[];
+    orders_id?: Orders[];
+
+    // @Column()
+    // createdAT: string;
 }
