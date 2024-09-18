@@ -1,12 +1,13 @@
 import { categories } from "src/entity/categories.entity";
 import { OrderDetails } from "src/entity/orderDetails.entity";
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import {v4 as uuid } from 'uuid';
+import { File } from "./Files/files.entity";
 
 @Entity({name: 'products'})
 export class Products{
     @PrimaryGeneratedColumn('uuid')
-    id: string = uuid();
+    id: string;
     
     @Column({type: 'varchar', length: 50, nullable: false})
     name: string;
@@ -17,7 +18,7 @@ export class Products{
     @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
     price: number;
 
-    @Column({ type: 'int', nullable: false })
+    @Column({ nullable: false })
     stock: number;
 
     @Column({ type: 'varchar', default: 'default-image-url', nullable: true })
@@ -30,5 +31,6 @@ export class Products{
     @JoinTable()
     orderDetails: OrderDetails[];
 
-    
+    @OneToMany(()=> File, (files)=> files.products)
+    files:File[];
 }

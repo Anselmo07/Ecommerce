@@ -1,12 +1,16 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseGuards, Query, HttpStatus } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseGuards, Query, HttpStatus, UseInterceptors, UploadedFile, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator, UsePipes } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { AuthGuard } from "src/Auth/auth.guard";
 import { Users } from "./users.entity";
 import { CreateUserDto } from "src/DTO/CreateUserDto";
+import { UUIDValidationPipe } from "src/validator/uuid-validation.pipe";
+import { CloudinaryService } from "src/Cloudinary/cloudinary.service";
+import { FileInterceptor } from "@nestjs/platform-express";
+import { MaxSizeValidatorPipe } from "src/validator/max-size-validator";
 
 @Controller("users")
 export class UsersController {
-    constructor(private readonly usersService: UsersService){}
+    constructor(private readonly usersService: UsersService, private readonly cloudinaryService: CloudinaryService ){}
 
     @Get()
     @HttpCode(HttpStatus.OK)
@@ -21,7 +25,7 @@ export class UsersController {
     @Get(':id')
     @HttpCode(HttpStatus.OK)
     @UseGuards(AuthGuard)
-    getUsersById(@Param('id') id: string){
+    getUsersById(@Param('id', UUIDValidationPipe) id: string){
         return this.usersService.getUsersById(String(id));
     }
 
@@ -33,13 +37,21 @@ export class UsersController {
 
     @Put(':id')
     // @UseGuards(AuthGuard)
-    updateUsers(@Param('id')id: string , @Body() user: CreateUserDto):Promise<Users>{
+    updateUsers(@Param('id', UUIDValidationPipe)id: string , @Body() user: CreateUserDto):Promise<Users>{
         return this.usersService.updateUsers(String(id), user);
     }
 
     @Delete(':id')
     @UseGuards(AuthGuard)
-    deleteUsers(@Param('id') id: string){
+    deleteUsers(@Param('id', UUIDValidationPipe) id: string){
         return this.usersService.deleteUsersById(Number(id));
+    }
+
+    // CHEQUEAR H7
+    @Post('/files/uploadImage/:id')
+    @UseInterceptors(FileInterceptor('image'))
+    @UsePipes(MaxSizeValidatorPipe)
+    getUserImages(@UploadedFile() file: Express.Multer.File){
+        return this.cloudinaryService.uploadImage(file);
     }
 }

@@ -10,6 +10,6 @@ import { Products } from './products.entity';
   imports: [forwardRef(() => AuthModule),TypeOrmModule.forFeature([Products]) ],
   providers: [ProductsService, ProductsRepository],
   controllers: [ProductsController],
-  exports:[ProductsRepository]
+  exports:[ProductsRepository, ProductsService]
 })
 export class ProductsModule {}

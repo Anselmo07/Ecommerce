@@ -10,10 +10,13 @@ import { Orders } from "src/entity/orders.entity";
 import { OrdersRepository } from "src/orders/orders.repository";
 import { ProductsRepository } from "src/Products/products.repository";
 import { ProductsModule } from "src/Products/products.module";
+import { CloudinaryConfig } from "src/config/cloudinary";
+import { CloudinaryService } from "src/Cloudinary/cloudinary.service";
+
 
 @Module({
     imports: [forwardRef(() => AuthModule), TypeOrmModule.forFeature([Users, Orders]), ProductsModule],
-    providers: [UsersService, UsersRepository],
+    providers: [UsersService, UsersRepository, CloudinaryConfig, CloudinaryService,],
     controllers: [UsersController],
     exports:[UsersRepository, UsersService],
 })

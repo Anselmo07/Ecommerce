@@ -1,7 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post, Put, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { Products } from './products.entity';
 import { AuthGuard } from 'src/Auth/auth.guard';
+import { UUIDValidationPipe } from 'src/validator/uuid-validation.pipe';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('products')
 export class ProductsController {
@@ -11,26 +13,27 @@ export class ProductsController {
     return this.productsService.getProducts();
   }
 
-  @Get('id')
-  getProdcutsById(@Param('id') id:string){
-    return this.productsService.getProductsById(String(id));
+  @Get(':id')
+  getProdcutsById(@Param('id', UUIDValidationPipe) id:string): Promise<Products>{
+    return this.productsService.getProductsById(id);
   }
 
   @Post()
-  @UseGuards(AuthGuard)
+  // @UseGuards(AuthGuard)
   createProducts(@Body() products: Products):Promise<Products>{
     return this.productsService.createProducts(products);
   }  
   
   @Put()
   @UseGuards(AuthGuard)
-  updateProducts(@Param('id') id : string, @Body() products: Products){
+  updateProducts(@Param('id', UUIDValidationPipe) id : string, @Body() products: Products){
     return this.productsService.updateProducts(String(id), products);
   }
 
   @Delete(':id')
   @UseGuards(AuthGuard)
-  deleteProductsById(@Param('id')id: string){
+  deleteProductsById(@Param('id', UUIDValidationPipe)id: string){
     return this.productsService.deleteProductsById(String(id));
   }
+
 }

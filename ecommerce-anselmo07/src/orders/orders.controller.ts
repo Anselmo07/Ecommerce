@@ -2,6 +2,7 @@ import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post } from "@nestj
 import { OrdersService } from "./orders.service";
 import { Orders } from "src/entity/orders.entity";
 import { CreateOrderDto } from "src/DTO/CreateOrderDto";
+import { UUIDValidationPipe } from "src/validator/uuid-validation.pipe";
 
 @Controller("orders")
 export class OrdersController{
@@ -9,7 +10,7 @@ export class OrdersController{
 
     @Get(':id')
     @HttpCode(HttpStatus.OK)
-    getOrder(@Param('id') orderId: string): Promise<Orders> {
+    getOrder(@Param('id', UUIDValidationPipe) orderId: string): Promise<Orders> {
         return this.ordersService.getOrder(orderId);
     }
 
