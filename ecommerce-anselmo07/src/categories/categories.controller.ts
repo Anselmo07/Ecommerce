@@ -1,6 +1,6 @@
-import { Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post } from "@nestjs/common";
 import { categoriesService } from "./categories.service";
-import { categories } from "src/entity/categories.entity";
+import { Categories } from "src/entity/categories.entity";
 
 @Controller("categories")
 export class CategoriesController{
@@ -17,7 +17,7 @@ export class CategoriesController{
     }
 
     @Post()
-    addCategories(){
+    addCategories(@Body() categories: Categories[]){
         return this.categoriesService.addCategories(categories);
     }
 

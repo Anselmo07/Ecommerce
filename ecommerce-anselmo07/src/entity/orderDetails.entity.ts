@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import {v4 as uuid } from 'uuid';
 import { Orders } from "./orders.entity";
 import { Products } from "src/Products/products.entity";
@@ -16,5 +16,6 @@ export class OrderDetails{
     order: Orders;
 
     @ManyToMany(() => Products, (products) => products.orderDetails)
+    @JoinTable()
     products: Products[];
 }

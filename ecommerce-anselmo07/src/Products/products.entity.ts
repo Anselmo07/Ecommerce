@@ -1,4 +1,4 @@
-import { categories } from "src/entity/categories.entity";
+import { Categories } from "src/entity/categories.entity";
 import { OrderDetails } from "src/entity/orderDetails.entity";
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import {v4 as uuid } from 'uuid';
@@ -24,8 +24,8 @@ export class Products{
     @Column({ type: 'varchar', default: 'default-image-url', nullable: true })
     imgUrl: string;
 
-    @ManyToOne(() => categories, (category) => category.products)
-    category_id: categories;
+    @ManyToOne(() => Categories, (category) => category.products)
+    category_id: Categories;
 
     @ManyToMany(()=> OrderDetails, (orderDetails) => orderDetails.products)
     @JoinTable()

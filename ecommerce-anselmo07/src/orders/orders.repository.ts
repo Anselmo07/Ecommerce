@@ -42,7 +42,7 @@ export class OrdersRepository{
         await this.orderDetailsRepository.save(orderDetail);
 
         order.orderDetails = orderDetail;
-        await this.orderDetailsRepository.save(order);
+        await this.ordersRepository.save(order); // CAMBIO ACA ACA ACA CAC CACACA
 
         return order;
     }

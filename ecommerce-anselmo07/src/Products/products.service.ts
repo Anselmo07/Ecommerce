@@ -7,8 +7,11 @@ import { Products } from "./products.entity";
 export class ProductsService {
   constructor(private productsRepository: ProductsRepository){}
   
-  getProducts(): Promise<Products[]> {
-    return this.productsRepository.getProducts();
+  async getProducts(): Promise<Products[]> {
+    const products = await this.productsRepository.getProducts();
+    return products.map(products =>{
+      return{ ...products, price: Number(products.price),};
+    });
   }
 
   getProductsById(id: string): Promise<Products>{

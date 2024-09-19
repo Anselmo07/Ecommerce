@@ -3,7 +3,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import {v4 as uuid } from 'uuid';
 
 @Entity({name: 'categories'})
-export class categories{
+export class Categories{
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
