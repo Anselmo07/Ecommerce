@@ -31,6 +31,9 @@ export class Users {
     @OneToMany(() => Orders, (order)=> order.user_id)
     orders_id?: Orders[];
 
+    @Column({default: false})
+    isAdmin: boolean;
+
     // @Column()
     // createdAT: string;
 }

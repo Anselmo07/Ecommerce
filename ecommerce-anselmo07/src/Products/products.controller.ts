@@ -4,6 +4,9 @@ import { Products } from './products.entity';
 import { AuthGuard } from 'src/Auth/auth.guard';
 import { UUIDValidationPipe } from 'src/validator/uuid-validation.pipe';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { Roles } from 'src/decorators/roles.decorator';
+import { Role } from 'src/Auth/roles.enum';
+import { RolesGuard } from 'src/Auth/roles.guard';
 
 @Controller('products')
 export class ProductsController {
@@ -14,6 +17,8 @@ export class ProductsController {
   }
 
   @Get(':id')
+  @Roles(Role.Admin)
+  @UseGuards(AuthGuard, RolesGuard)
   getProdcutsById(@Param('id', UUIDValidationPipe) id:string): Promise<Products>{
     return this.productsService.getProductsById(id);
   }

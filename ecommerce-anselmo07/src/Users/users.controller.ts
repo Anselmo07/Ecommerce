@@ -7,6 +7,9 @@ import { UUIDValidationPipe } from "src/validator/uuid-validation.pipe";
 import { CloudinaryService } from "src/Cloudinary/cloudinary.service";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { MaxSizeValidatorPipe } from "src/validator/max-size-validator";
+import { Roles } from "src/decorators/roles.decorator";
+import { Role } from "src/Auth/roles.enum";
+import { RolesGuard } from "src/Auth/roles.guard";
 
 @Controller("users")
 export class UsersController {
@@ -14,7 +17,8 @@ export class UsersController {
 
     @Get()
     @HttpCode(HttpStatus.OK)
-    @UseGuards(AuthGuard)
+    @Roles(Role.Admin)
+    @UseGuards(AuthGuard, RolesGuard)
     getUsers(
         @Query('page') page: number = 1,
         @Query('limit') limit: number = 5
@@ -24,10 +28,11 @@ export class UsersController {
 
     @Get(':id')
     @HttpCode(HttpStatus.OK)
-    @UseGuards(AuthGuard)
-    getUsersById(@Param('id', UUIDValidationPipe) @Req() request:Request & {user:any} , id: string){
+    @Roles(Role.Admin)
+    @UseGuards(AuthGuard, RolesGuard)
+    getUsersById(@Param('id', UUIDValidationPipe)id: string ,@Req() request:Request & {user:any}){
         console.log(request.user);
-        return this.usersService.getUsersById(String(id));
+        return this.usersService.getUsersById(id);
     }
 
     @Post()
@@ -55,5 +60,12 @@ export class UsersController {
     @UsePipes(MaxSizeValidatorPipe)
     getUserImages(@UploadedFile() file: Express.Multer.File){
         return this.cloudinaryService.uploadImage(file);
+    }
+
+    @Get('admin')
+    @Roles(Role.Admin)
+    @UseGuards(AuthGuard, RolesGuard)
+    getAdmin(){
+        return 'Ruta protegida';
     }
 }
