@@ -17,7 +17,7 @@ export class UsersService{
         return this.usersRepository.getById(id);
     }
 
-    createUsers(user: Omit<Users, 'id'>): Promise<Users>{
+    createUsers(user: Omit<CreateUserDto, 'id'>): Promise<Users>{
         return this.usersRepository.createUsers(user);
     }
 

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseGuards, Query, HttpStatus, UseInterceptors, UploadedFile, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator, UsePipes } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseGuards, Query, HttpStatus, UseInterceptors, UploadedFile, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator, UsePipes, Req } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { AuthGuard } from "src/Auth/auth.guard";
 import { Users } from "./users.entity";
@@ -25,7 +25,8 @@ export class UsersController {
     @Get(':id')
     @HttpCode(HttpStatus.OK)
     @UseGuards(AuthGuard)
-    getUsersById(@Param('id', UUIDValidationPipe) id: string){
+    getUsersById(@Param('id', UUIDValidationPipe) @Req() request:Request & {user:any} , id: string){
+        console.log(request.user);
         return this.usersService.getUsersById(String(id));
     }
 
@@ -36,7 +37,7 @@ export class UsersController {
     }
 
     @Put(':id')
-    // @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     updateUsers(@Param('id', UUIDValidationPipe)id: string , @Body() user: CreateUserDto):Promise<Users>{
         return this.usersService.updateUsers(String(id), user);
     }
@@ -49,6 +50,7 @@ export class UsersController {
 
     // CHEQUEAR H7
     @Post('/files/uploadImage/:id')
+    @UseGuards(AuthGuard)
     @UseInterceptors(FileInterceptor('image'))
     @UsePipes(MaxSizeValidatorPipe)
     getUserImages(@UploadedFile() file: Express.Multer.File){

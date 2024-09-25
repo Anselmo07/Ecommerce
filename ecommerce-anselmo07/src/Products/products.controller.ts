@@ -26,6 +26,7 @@ export class ProductsController {
   
   @Put()
   @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard)
   updateProducts(@Param('id', UUIDValidationPipe) id : string, @Body() products: Products){
     return this.productsService.updateProducts(String(id), products);
   }

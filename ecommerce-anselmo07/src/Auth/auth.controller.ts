@@ -1,7 +1,10 @@
-import { BadRequestException, Body, Controller, Get, Post, UnauthorizedException } from "@nestjs/common";
+import { BadRequestException, Body, Controller, Get, Post, UnauthorizedException, UseGuards } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { throwError } from "rxjs";
 import { LoginUserDto } from "src/DTO/LoginUserDto";
+import { User } from "src/Users/users.interface";
+import { Users } from "src/Users/users.entity";
+import { AuthGuard } from "./auth.guard";
 
 @Controller("auth")
 export class AuthController{
@@ -11,21 +14,17 @@ export class AuthController{
     getAuth(){
         return this.authService.getAuth();
     }
-
-    @Post('signin')
-    async postAuth(@Body () body:LoginUserDto){
-        const {email, password} = body;
-
-        if(!email || !password ){
-            throw new BadRequestException('Se requiere email o contrasena');
-        }
-        const user = await this.authService.validateUser(email, password);
-
-        if(!user){
-            throw new UnauthorizedException('Email o contrasena son incorrectas');
-        }
-        return { message: 'Login exitoso', userId: user.id };
+    
+    @Post('signup')
+    async signUp(@Body() signUp: Users){
+        const user = await this.authService.signUp(signUp);
+        return  user;
     }
 
+    @Post('signin')
+    // @UseGuards(AuthGuard)
+    singIn(@Body() user: LoginUserDto){
+        return this.authService.singIn(user.email, user.password);
+    }
 
 }
