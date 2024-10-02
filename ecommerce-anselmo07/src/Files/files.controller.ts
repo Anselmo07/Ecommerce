@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInter
 import { UUIDValidationPipe } from "src/validator/uuid-validation.pipe";
 import { FilesService } from "./files.service";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { ProductsService } from "../products.service";
+import { ProductsService } from "src/Products/products.service";
 
 @Controller('files')
 export class FileController{

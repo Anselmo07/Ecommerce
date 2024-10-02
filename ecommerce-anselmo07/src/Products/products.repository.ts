@@ -1,5 +1,4 @@
 import { Injectable, NotFoundException} from "@nestjs/common";
-import { Prodcuts } from "./products.interface";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Products } from "./products.entity";
 import { Repository } from "typeorm";

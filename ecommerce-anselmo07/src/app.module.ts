@@ -5,10 +5,10 @@ import { AuthModule } from './Auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import typeOrmConfig from './config/typeorm';
-import { OrdersModule } from './orders/orders.module';
-import { FileModule } from './Products/Files/files.module';
+import { OrdersModule } from './orders/orders.module'; 
 import { CategoriesModule } from './categories/categories.module';
 import { JwtModule } from '@nestjs/jwt';
+import { FileModule } from './Files/files.module';
 
 @Module({
   imports: [ConfigModule.forRoot({

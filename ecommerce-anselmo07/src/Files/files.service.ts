@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Products } from "../products.entity";
 import { File } from "./files.entity";
 import { Repository } from "typeorm";
+import { Products } from "src/Products/products.entity";
 
 @Injectable()
 export class FilesService {

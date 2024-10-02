@@ -1,11 +1,10 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
-import { Users } from "src/Users/users.entity";
-import { UsersRepository } from "src/Users/users.repository";
+import { Users } from "../Users/users.entity";
+import { UsersRepository } from "../Users/users.repository";
 import * as bcrypt from 'bcrypt';
 import { LoginUserDto } from "src/DTO/LoginUserDto";
 import { CreateUserDto } from "src/DTO/CreateUserDto";
-import { UsersService } from "src/Users/users.service";
-import { User } from "src/Users/users.interface";
+import { UsersService } from "../Users/users.service";
 import { JwtService } from "@nestjs/jwt";
 import { Role } from "./roles.enum";
 
@@ -31,7 +30,7 @@ export class AuthService {
         return user;
     }
 
-    async signUp (user: Users){
+    async signUp (user: CreateUserDto){
         const emailUser = await this.userRepository.findByEmail(user.email);
         if(emailUser){
             throw new BadRequestException('Email already exist');

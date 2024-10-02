@@ -2,8 +2,8 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Users } from "./users.entity";
 import { Repository } from "typeorm";
-import { Orders } from "src/entity/orders.entity";
-import { CreateUserDto } from "src/DTO/CreateUserDto";
+import { Orders } from "../entity/orders.entity";
+import { CreateUserDto } from "../DTO/CreateUserDto";
 
 @Injectable()
 export class UsersRepository {

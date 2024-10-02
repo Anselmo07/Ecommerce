@@ -3,7 +3,6 @@ import { ProductsService } from './products.service';
 import { Products } from './products.entity';
 import { AuthGuard } from 'src/Auth/auth.guard';
 import { UUIDValidationPipe } from 'src/validator/uuid-validation.pipe';
-import { FileInterceptor } from '@nestjs/platform-express';
 import { Roles } from 'src/decorators/roles.decorator';
 import { Role } from 'src/Auth/roles.enum';
 import { RolesGuard } from 'src/Auth/roles.guard';

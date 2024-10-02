@@ -1,10 +1,11 @@
 import { BadRequestException, Body, Controller, Get, Post, UnauthorizedException, UseGuards } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { throwError } from "rxjs";
-import { LoginUserDto } from "src/DTO/LoginUserDto";
-import { User } from "src/Users/users.interface";
-import { Users } from "src/Users/users.entity";
+import { LoginUserDto } from "../DTO/LoginUserDto";
+import { User } from "../Users/users.interface";
+import { Users } from "../Users/users.entity";
 import { AuthGuard } from "./auth.guard";
+import { CreateUserDto } from "../DTO/CreateUserDto";
 
 @Controller("auth")
 export class AuthController{
@@ -16,7 +17,7 @@ export class AuthController{
     }
     
     @Post('signup')
-    async signUp(@Body() signUp: Users){
+    async signUp(@Body() signUp: CreateUserDto){
         const user = await this.authService.signUp(signUp);
         return  user;
     }

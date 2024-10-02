@@ -1,4 +1,4 @@
-import { Users } from "src/Users/users.entity";
+import { Users } from "../Users/users.entity";
 import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import {v4 as uuid } from 'uuid';
 import { OrderDetails } from "./orderDetails.entity";

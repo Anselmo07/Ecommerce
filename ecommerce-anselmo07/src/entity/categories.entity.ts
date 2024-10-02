@@ -1,4 +1,4 @@
-import { Products } from "src/Products/products.entity";
+import { Products } from "../Products/products.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import {v4 as uuid } from 'uuid';
 
