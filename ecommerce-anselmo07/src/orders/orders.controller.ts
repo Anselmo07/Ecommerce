@@ -4,7 +4,9 @@ import { Orders } from "src/entity/orders.entity";
 import { CreateOrderDto } from "src/DTO/CreateOrderDto";
 import { UUIDValidationPipe } from "src/validator/uuid-validation.pipe";
 import { AuthGuard } from "src/Auth/auth.guard";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags('Orders')
 @Controller("orders")
 export class OrdersController{
     constructor(private readonly ordersService: OrdersService){}

@@ -6,7 +6,9 @@ import { UUIDValidationPipe } from 'src/validator/uuid-validation.pipe';
 import { Roles } from 'src/decorators/roles.decorator';
 import { Role } from 'src/Auth/roles.enum';
 import { RolesGuard } from 'src/Auth/roles.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Products')
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}

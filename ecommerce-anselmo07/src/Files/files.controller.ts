@@ -3,7 +3,9 @@ import { UUIDValidationPipe } from "src/validator/uuid-validation.pipe";
 import { FilesService } from "./files.service";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ProductsService } from "src/Products/products.service";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags('Products')
 @Controller('files')
 export class FileController{
     constructor(private readonly fileService: FilesService, private readonly productsService: ProductsService){}
