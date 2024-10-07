@@ -5,12 +5,12 @@ import { Users } from "./users.entity";
 import { CreateUserDto } from "src/DTO/CreateUserDto";
 import { UUIDValidationPipe } from "src/validator/uuid-validation.pipe";
 import { CloudinaryService } from "src/Cloudinary/cloudinary.service";
-import { FileInterceptor } from "@nestjs/platform-express";
 import { MaxSizeValidatorPipe } from "src/validator/max-size-validator";
 import { Roles } from "src/decorators/roles.decorator";
 import { Role } from "src/Auth/roles.enum";
 import { RolesGuard } from "src/Auth/roles.guard";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { FileInterceptor } from "@nestjs/platform-express";
 
 @ApiTags('Users')
 @Controller("users")
@@ -54,22 +54,8 @@ export class UsersController {
     @Delete(':id')
     @UseGuards(AuthGuard)
     deleteUsers(@Param('id', UUIDValidationPipe) id: string){
-        return this.usersService.deleteUsersById(Number(id));
+        return this.usersService.deleteUsersById(id);
     }
 
-    // CHEQUEAR H7
-    // @Post('/files/uploadImage/:id')
-    // @UseGuards(AuthGuard)
-    // @UseInterceptors(FileInterceptor('image'))
-    // @UsePipes(MaxSizeValidatorPipe)
-    // getUserImages(@UploadedFile() file: Express.Multer.File){
-    //     return this.cloudinaryService.uploadImage(file);
-    // }
-
-    // @Get('admin')
-    // @Roles(Role.Admin)
-    // @UseGuards(AuthGuard, RolesGuard)
-    // getAdmin(){
-    //     return 'Ruta protegida';
-    // }
+    
 }

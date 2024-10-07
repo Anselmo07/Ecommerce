@@ -64,7 +64,7 @@ export class UsersRepository {
         return this.usersRepository.save(buscarId);
     }
 
-    async deleteById(id: number):Promise<void>{
+    async deleteById(id: string):Promise<void>{
         const initial = await this.usersRepository.delete(id);
 
         if (initial.affected === 0) {

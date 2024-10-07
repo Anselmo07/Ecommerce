@@ -2,7 +2,6 @@ import { Injectable } from "@nestjs/common";
 import { UsersRepository } from "./users.repository";
 import { Users } from "./users.entity";
 import { CreateUserDto } from "../DTO/CreateUserDto";
-import { promises } from "dns";
 
 @Injectable()
 export class UsersService{
@@ -27,7 +26,7 @@ export class UsersService{
     }
 
 
-    deleteUsersById(id: number){
+    deleteUsersById(id: string ){
         return this.usersRepository.deleteById(id);
     }
 
