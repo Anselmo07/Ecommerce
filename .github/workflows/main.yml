@@ -25,7 +25,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: ./ecommerce-anselmo07
-        file: .ecommerce-anselmo07/Dockerfile
+        file: ./ecommerce-anselmo07/Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/nest-demo:latest
       
