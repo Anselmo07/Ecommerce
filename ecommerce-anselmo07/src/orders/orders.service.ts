@@ -14,5 +14,13 @@ export class OrdersService{
     addOrder(userId: string, products:{id: string}[]): Promise<Orders>{
         return this.ordersRepository.addOrder(userId, products);
     }
+
+    getsOrder():Promise<Orders[]>{
+        return this.ordersRepository.getsOrder();
+    }
     
+
+    deleteOrder(id:string):Promise<void>{
+        return this.ordersRepository.deleteOrder(id);
+    }
 }

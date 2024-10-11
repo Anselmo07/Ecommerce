@@ -26,7 +26,7 @@ export class ProductsService {
     return this.productsRepository.updateProducts(id, products);
   }
 
-  deleteProductsById(id: string): Promise<void> {
+  deleteProductsById(id: string){
     return this.productsRepository.deleteProductsById(id);
   }
 

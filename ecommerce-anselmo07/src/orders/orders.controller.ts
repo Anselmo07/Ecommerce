@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, UseGuards } from "@nestjs/common";
 import { OrdersService } from "./orders.service";
 import { Orders } from "src/entity/orders.entity";
 import { CreateOrderDto } from "src/DTO/CreateOrderDto";
@@ -11,6 +11,11 @@ import { ApiTags } from "@nestjs/swagger";
 export class OrdersController{
     constructor(private readonly ordersService: OrdersService){}
 
+    @Get()
+    getsOrder():Promise<Orders[]>{
+        return this.ordersService.getsOrder();
+    }
+
     @Get(':id')
     @HttpCode(HttpStatus.OK)
     @UseGuards(AuthGuard)
@@ -22,5 +27,10 @@ export class OrdersController{
     @HttpCode(HttpStatus.CREATED)
     addOrde(@Body() orderData:CreateOrderDto): Promise<Orders>{
         return this.ordersService.addOrder(orderData.userId, orderData.products);
+    }
+
+    @Delete(':id')
+    deleteOrder(@Param('id', UUIDValidationPipe)id: string){
+        return this.ordersService.deleteOrder(id)
     }
 }

@@ -6,16 +6,16 @@ services:
     ports:
       - '3000:3000'
     env_file:
-    - .env.development
+    - .env.docker
     depends_on:
-      -postgresdb
+      - postgresdb 
   
   postgresdb:
     image: postgres
     volumes:
         - pgdata:/var/lib/postgresql/data
     env_file:
-    - .env.development
+    - .env.docker
 
 volumes:
   pgdata:          

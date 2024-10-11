@@ -1,13 +1,18 @@
 import { ArgumentMetadata, BadRequestException, Injectable, PipeTransform } from "@nestjs/common";
 
 @Injectable()
-export class MaxSizeValidatorPipe implements PipeTransform{
-    transform(value: any, metadata: ArgumentMetadata) {
-        const maxSize = 200000;
+export class MaxSizeValidatorPipe implements PipeTransform {
+    transform(file: Express.Multer.File, metadata: ArgumentMetadata) {
+        const maxSize = 200000; // 200 KB
 
-        if(value.size > maxSize){
-            throw new BadRequestException('El tamano del archivo es muy grande');
+        if (!file || !file.size) {
+            throw new BadRequestException('El archivo no es válido o está vacío');
         }
-        return value;
+
+        if (file.size > maxSize) {
+            throw new BadRequestException(`El tamaño del archivo supera los ${maxSize / 1000}KB`);
+        }
+
+        return file;
     }
 }
