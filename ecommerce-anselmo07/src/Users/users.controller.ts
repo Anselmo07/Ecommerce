@@ -25,8 +25,6 @@ export class UsersController {
         @Query('page') page: number = 1,
         @Query('limit') limit: number = 5
     ): Promise<Users[]> {
-        console.log('Usuarios recuperados:', this.usersService.getUsers(page, limit));
-
         return this.usersService.getUsers();
     }
 

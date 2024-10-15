@@ -1,4 +1,3 @@
-// uuid-validation.pipe.ts
 import { PipeTransform, Injectable, BadRequestException } from '@nestjs/common';
 import { isUUID } from 'class-validator';
 

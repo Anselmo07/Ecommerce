@@ -34,33 +34,28 @@ export class OrdersRepository{
     
             if (!product) throw new Error("El producto no tiene más stock");
     
-            // Reducir el stock del producto
-            product.stock -= 1;
+            product.stock -= 1; // Reducir el stock del producto
             await this.productsRepository.save(product);
+            
+            orderDetail.products.push(product); // Añadir el producto al detalle del pedido
     
-            // Añadir el producto al detalle del pedido
-            orderDetail.products.push(product);
-    
-            // Convertir el precio del producto y acumularlo en el total
-            const productPrice = parseFloat(product.price.toString());
+            const productPrice = parseFloat(product.price.toString()); // Convertir el precio del producto y acumularlo en el total
             if (isNaN(productPrice)) {
                 throw new Error('El precio del producto no es válido');
             }
             totalPrice += productPrice;
         }
     
-        // Asignar el precio total al detalle del pedido
-        orderDetail.price = parseFloat(totalPrice.toFixed(2));
+        orderDetail.price = parseFloat(totalPrice.toFixed(2)); // Asignar el precio total al detalle del pedido
         await this.orderDetailsRepository.save(orderDetail);
     
-        // Asignar el detalle del pedido a la orden
-        order.orderDetails = orderDetail;
+        order.orderDetails = orderDetail; // Asignar el detalle del pedido a la orden
         await this.ordersRepository.save(order);
     
         return order;
     }
     
-    
+
     async getOrder(orderId: string): Promise<Orders> {
         const order = await this.ordersRepository.findOne({
             where: { id: orderId },
@@ -70,6 +65,7 @@ export class OrdersRepository{
         return order;
     }
 
+    
     async getsOrder(): Promise<Orders[]>{
         return this.ordersRepository.find();
     }

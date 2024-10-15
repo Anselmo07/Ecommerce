@@ -19,7 +19,7 @@ export class RolesGuard implements CanActivate{
         if(!valid){
             throw new ForbiddenException('Usted no tiene permiso para ingresar a esta ruta');
         }
-        console.log('User payload:', user);
+
         return valid;
     }
 }

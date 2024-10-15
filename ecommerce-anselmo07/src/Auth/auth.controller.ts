@@ -25,7 +25,6 @@ export class AuthController{
     }
 
     @Post('signin')
-    // @UseGuards(AuthGuard)
     singIn(@Body() user: LoginUserDto){
         return this.authService.singIn(user.email, user.password);
     }

@@ -3,7 +3,7 @@ import { ArgumentMetadata, BadRequestException, Injectable, PipeTransform } from
 @Injectable()
 export class MaxSizeValidatorPipe implements PipeTransform {
     transform(file: Express.Multer.File, metadata: ArgumentMetadata) {
-        const maxSize = 200000; // 200 KB
+        const maxSize = 200000;
 
         if (!file || !file.size) {
             throw new BadRequestException('El archivo no es válido o está vacío');

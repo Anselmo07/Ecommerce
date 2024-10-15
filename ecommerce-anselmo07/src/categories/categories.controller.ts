@@ -13,11 +13,6 @@ export class CategoriesController{
         return this.categoriesService.getCategories();
     }
 
-    @Get('seeder')
-    seedCategories(){
-        // return this.categoriesService.seedCategories();
-    }
-
     @Post()
     addCategories(@Body() categories: Categories[]){
         return this.categoriesService.addCategories(categories);
