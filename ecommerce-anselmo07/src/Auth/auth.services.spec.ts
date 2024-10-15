@@ -5,6 +5,7 @@ import { UsersService } from "../Users/users.service"
 import { CreateUserDto } from "../DTO/CreateUserDto"
 import { Users } from "../Users/users.entity"
 import { UsersRepository } from "../Users/users.repository"
+import { Role } from "./roles.enum"
 
 describe('authService', () => {
     let authService : AuthService;
@@ -25,7 +26,7 @@ describe('authService', () => {
             findByEmail: () => Promise.resolve(undefined),
             createUsers:(user):Promise<Users> => Promise.resolve({
                 ...user,
-                isAdmin: false,
+                isAdmin: Role.User,
                 id: '1234fs-234sd-25csfd-34sdfg',
                 password: 'hashedPassword',
             }),

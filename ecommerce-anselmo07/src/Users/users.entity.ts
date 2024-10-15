@@ -1,7 +1,7 @@
-import { Role } from "src/Auth/roles.enum";
+import { Role } from "../Auth/roles.enum";
 import { Orders } from "../entity/orders.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import {v4 as uuid } from 'uuid';
+// import {v4 as uuid } from 'uuid';
 
 @Entity({name: 'users'})
 export class Users {

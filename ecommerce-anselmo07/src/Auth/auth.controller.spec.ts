@@ -7,6 +7,7 @@ import { hash } from "bcrypt";
 import { Users } from "../Users/users.entity";
 import { JwtService } from "@nestjs/jwt";
 import { LoginUserDto } from "../DTO/LoginUserDto";
+import { Role } from "./roles.enum";
 describe ('AuthController', () => {
     let controller: AuthController;
     let authService:Partial<AuthService>;
@@ -24,7 +25,7 @@ describe ('AuthController', () => {
     const mockSingIn: LoginUserDto = {
         email:'Juanceto@gmail.com',
         password: 'Aa12345*',
-        isAdmin: true,
+        isAdmin: 'user',
     };
 
     beforeEach(async () => {
@@ -43,7 +44,7 @@ describe ('AuthController', () => {
                     return Promise.resolve({
                     email: 'Juanceto@gmail.com',
                     password: 'Aa12345*',
-                    isAdmin: true,
+                    isAdmin: 'admin',
                     }as Users)
                 }else{
                     return Promise.resolve(undefined);
@@ -51,7 +52,7 @@ describe ('AuthController', () => {
         },
             createUsers:(user):Promise<Users> => Promise.resolve({
                 ...user,
-                isAdmin: false,
+                isAdmin: Role.User,
                 id: '1234fs-234sd-25csfd-34sdfg',
                 password: 'hashedPassword',
             }),
