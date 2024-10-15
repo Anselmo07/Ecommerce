@@ -19,5 +19,5 @@ export class LoginUserDto {
     password:string;
 
     @IsEmpty()
-    isAdmin:boolean;
+    isAdmin:string;
 }

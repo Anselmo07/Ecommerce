@@ -25,7 +25,7 @@ export class ProductsController {
   }
 
   @Post()
-  // @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard)
   createProducts(@Body() products: Products):Promise<Products>{
     return this.productsService.createProducts(products);
   }  

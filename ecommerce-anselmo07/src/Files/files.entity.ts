@@ -14,8 +14,4 @@ export class File {
 
     @Column({ type: 'bytea'})
     data: Buffer;
-
-    @ManyToOne(()=> Products, (products) => products.files)
-    @JoinColumn({name: "products_id"})
-    products: Products;
 }

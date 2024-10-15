@@ -60,8 +60,8 @@ export class AuthService {
             sub: dbUser.id,
             id: dbUser.id,
             email: dbUser.email,
-            // isAdmin: dbUser.isAdmin
-            roles: [dbUser.isAdmin ? Role.Admin : Role.User]
+            roles:[dbUser.isAdmin === Role.Admin ? Role.Admin : Role.User]
+        
         }
         const token = this.jwtService.sign(userPayload);
 

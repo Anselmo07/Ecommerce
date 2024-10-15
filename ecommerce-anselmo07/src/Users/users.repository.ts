@@ -11,8 +11,6 @@ export class UsersRepository {
         @InjectRepository(Users) private readonly usersRepository : Repository<Users>,
         @InjectRepository(Orders) private readonly ordersRepository : Repository<Orders>
     ){}
-        
-    
 
     async getUsers(page: number =1,limit: number = 5): Promise<Users[]>{
         if (page < 1) page = 1;
@@ -24,8 +22,7 @@ export class UsersRepository {
         });
 
         return users;
-    }    
-    
+    }
 
     async getById(id: string):Promise<Users> {
         const user = await this.usersRepository.findOne({
@@ -54,7 +51,7 @@ export class UsersRepository {
         return this.usersRepository.save(newUser);
     }
 
-    async UpdateUsers(id: string, user: CreateUserDto):Promise<Users>{
+    async UpdateUsers(id: string, user: Partial<CreateUserDto>):Promise<Users>{
         const buscarId = await this.usersRepository.preload({id, ...user,});
         
         if (!buscarId) {

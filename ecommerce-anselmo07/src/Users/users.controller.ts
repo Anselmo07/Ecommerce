@@ -25,7 +25,9 @@ export class UsersController {
         @Query('page') page: number = 1,
         @Query('limit') limit: number = 5
     ): Promise<Users[]> {
-        return this.usersService.getUsers(page, limit);
+        console.log('Usuarios recuperados:', this.usersService.getUsers(page, limit));
+
+        return this.usersService.getUsers();
     }
 
     @ApiBearerAuth()
@@ -34,7 +36,6 @@ export class UsersController {
     @Roles(Role.Admin)
     @UseGuards(AuthGuard, RolesGuard)
     getUsersById(@Param('id', UUIDValidationPipe)id: string ,@Req() request:Request & {user:any}){
-        console.log(request.user);
         return this.usersService.getUsersById(id);
     }
 
@@ -47,7 +48,7 @@ export class UsersController {
     @ApiBearerAuth()
     @Put(':id')
     @UseGuards(AuthGuard)
-    updateUsers(@Param('id', UUIDValidationPipe)id: string , @Body() user: CreateUserDto):Promise<Users>{
+    updateUsers(@Param('id', UUIDValidationPipe)id: string , @Body() user: Partial<CreateUserDto>):Promise<Users>{
         return this.usersService.updateUsers(String(id), user);
     }
 

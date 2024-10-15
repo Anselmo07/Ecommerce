@@ -9,11 +9,11 @@ export class ProductsRepository {
 ){}
 
     async getProducts(): Promise<Products[]> {
-        return this.productsRepository.find({relations:['files']});
+        return this.productsRepository.find();
     }
 
     async getProductsById(id: string): Promise<Products>{
-        return this.productsRepository.findOne({where: {id}, relations:['files']});
+        return this.productsRepository.findOne({where: {id}});
     }
 
     async createProducts(products: Products): Promise<Products>{

@@ -5,8 +5,7 @@ import { CreateUserDto } from "../DTO/CreateUserDto";
 
 @Injectable()
 export class UsersService{
-    constructor(private usersRepository: UsersRepository){
-        
+    constructor(private usersRepository: UsersRepository){  
     }
     
     getUsers(page: number = 1, limit: number = 5): Promise<Users[]> {
@@ -21,10 +20,9 @@ export class UsersService{
         return this.usersRepository.createUsers(user);
     }
 
-    updateUsers(id: string, user: CreateUserDto): Promise<Users>{
+    updateUsers(id: string, user: Partial<CreateUserDto>): Promise<Users>{
         return this.usersRepository.UpdateUsers(id, user);
     }
-
 
     deleteUsersById(id: string ){
         return this.usersRepository.deleteById(id);

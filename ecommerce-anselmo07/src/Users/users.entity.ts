@@ -1,3 +1,4 @@
+import { Role } from "src/Auth/roles.enum";
 import { Orders } from "../entity/orders.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import {v4 as uuid } from 'uuid';
@@ -31,8 +32,8 @@ export class Users {
     @OneToMany(() => Orders, (order)=> order.user_id)
     orders_id?: Orders[];
 
-    @Column({default: false})
-    isAdmin: boolean;
+    @Column({ type: 'enum', enum: Role, default: Role.User })
+    isAdmin: Role;
 
     // @Column()
     // createdAT: string;

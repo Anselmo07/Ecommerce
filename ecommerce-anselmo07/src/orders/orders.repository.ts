@@ -15,37 +15,51 @@ export class OrdersRepository{
     @InjectRepository(OrderDetails) private readonly orderDetailsRepository: Repository<OrderDetails>
     ){}
 
-    async addOrder(userId: string, product:{id:string}[]): Promise<Orders>{
-        const user = await this.usersRepository.findOne({where:{id: userId}});
+    async addOrder(userId: string, products: { id: string }[]): Promise<Orders> {
+        const user = await this.usersRepository.findOne({ where: { id: userId } });
         if (!user) throw new Error('User no encontrado');
-
+    
         const order = new Orders();
         order.user_id = user;
         order.date = new Date();
-
-        const orderDetail = new OrderDetails;
+    
+        const orderDetail = new OrderDetails();
         orderDetail.products = [];
         let totalPrice = 0;
-
-        for (const {id} of product){
-            const product = await this.productsRepository.findOne({where:{id,stock: MoreThan(0)}});
-            if (!product) throw new Error("El producto no tiene mas stock");
-
+    
+        for (const { id } of products) {
+            const product = await this.productsRepository.findOne({
+                where: { id, stock: MoreThan(0) },
+            });
+    
+            if (!product) throw new Error("El producto no tiene más stock");
+    
+            // Reducir el stock del producto
             product.stock -= 1;
             await this.productsRepository.save(product);
-
+    
+            // Añadir el producto al detalle del pedido
             orderDetail.products.push(product);
-            totalPrice += product.price;
+    
+            // Convertir el precio del producto y acumularlo en el total
+            const productPrice = parseFloat(product.price.toString());
+            if (isNaN(productPrice)) {
+                throw new Error('El precio del producto no es válido');
+            }
+            totalPrice += productPrice;
         }
-
-        orderDetail.price = totalPrice;
+    
+        // Asignar el precio total al detalle del pedido
+        orderDetail.price = parseFloat(totalPrice.toFixed(2));
         await this.orderDetailsRepository.save(orderDetail);
-
+    
+        // Asignar el detalle del pedido a la orden
         order.orderDetails = orderDetail;
-        await this.ordersRepository.save(order); // CAMBIO ACA ACA ACA CAC CACACA
-
+        await this.ordersRepository.save(order);
+    
         return order;
     }
+    
     
     async getOrder(orderId: string): Promise<Orders> {
         const order = await this.ordersRepository.findOne({

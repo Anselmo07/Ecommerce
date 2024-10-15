@@ -13,21 +13,6 @@ export class FilesService {
 
     }
 
-    async createFile({name, mimeType, data, products}:{
-        name: string;
-        mimeType: string;
-        data: Buffer;
-        products: Products;
-    }) {
-        const file = new File();
-        file.name = name;
-        file.mimeType = mimeType;
-        file.data = data;
-        file.products = products;
-
-        return this.filesRepository.save(file);
-    }
-
     async uploadImageToCloudinaryAndSaveProduct(file: Express.Multer.File, productId: string) {
 
         const uploadResult = await this.cloudinaryService.uploadImage(file);

@@ -46,7 +46,4 @@ export class Products{
     @ManyToMany(()=> OrderDetails, (orderDetails) => orderDetails.products)
     @JoinTable()
     orderDetails: OrderDetails[];
-
-    @OneToMany(()=> File, (files)=> files.products)
-    files:File[];
 }

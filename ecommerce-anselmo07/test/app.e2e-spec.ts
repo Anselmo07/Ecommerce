@@ -35,7 +35,6 @@ describe('AppController (e2e)', () => {
     
     expect(req.status).toBe(HttpStatus.OK);
     expect(req.body).toBeInstanceOf(Array);
-    console.log('token', authToken);
   });
 
   it('Get /users/:id', async () => {
