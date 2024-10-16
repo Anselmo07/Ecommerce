@@ -30,5 +30,4 @@ export class ProductsService {
     return this.productsRepository.deleteProductsById(id);
   }
 
-  
 }

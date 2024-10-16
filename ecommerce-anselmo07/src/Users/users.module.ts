@@ -12,12 +12,13 @@ import { ProductsRepository } from "src/Products/products.repository";
 import { ProductsModule } from "src/Products/products.module";
 import { CloudinaryConfig } from "src/config/cloudinary";
 import { CloudinaryService } from "src/Cloudinary/cloudinary.service";
+import { UsersSeed } from "src/seed/user/userSeed";
 
 
 @Module({
     imports: [forwardRef(() => AuthModule), TypeOrmModule.forFeature([Users, Orders]), ProductsModule],
-    providers: [UsersService, UsersRepository, CloudinaryConfig, CloudinaryService,],
+    providers: [UsersService, UsersRepository, CloudinaryConfig, CloudinaryService, UsersSeed],
     controllers: [UsersController],
-    exports:[UsersRepository, UsersService],
+    exports:[UsersRepository, UsersService,],
 })
 export class UsersModule {}

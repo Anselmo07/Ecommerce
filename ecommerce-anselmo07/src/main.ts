@@ -3,6 +3,9 @@ import { AppModule } from './app.module';
 import { loggerGloblal } from './middlewares/logger.middlewares';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import {  CategoriesSeed } from './seed/categories/categories.seed';
+import {  ProductsSeed } from './seed/products/products.seed';
+import { UsersSeed } from './seed/user/userSeed';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -17,6 +20,18 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, document);
+
+  const userSeed = app.get(UsersSeed);
+  await userSeed.seed();
+  console.log('Admin');
+
+  const categoriesSeed = app.get(CategoriesSeed);
+  await categoriesSeed.seed();
+  console.log('categories..')
+
+  const productsSeed = app.get(ProductsSeed);
+  await productsSeed.seed();
+  console.log('Products..')
 
   await app.listen(3000);
 }
