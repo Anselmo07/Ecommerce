@@ -13,11 +13,6 @@ import { ApiTags } from "@nestjs/swagger";
 export class AuthController{
     constructor(private readonly authService: AuthService){}
     
-    @Get('auth')
-    getAuth(){
-        return this.authService.getAuth();
-    }
-    
     @Post('signup')
     async signUp(@Body() signUp: CreateUserDto){
         const user = await this.authService.signUp(signUp);

@@ -41,9 +41,11 @@ export class Products{
     imgUrl: string;
 
     @ManyToOne(() => Categories, (category) => category.products)
+    @ApiProperty()
     category_id: Categories;
 
     @ManyToMany(()=> OrderDetails, (orderDetails) => orderDetails.products)
     @JoinTable()
+    @ApiProperty()
     orderDetails: OrderDetails[];
 }

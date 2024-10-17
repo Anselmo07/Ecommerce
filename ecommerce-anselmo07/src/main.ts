@@ -23,15 +23,12 @@ async function bootstrap() {
 
   const userSeed = app.get(UsersSeed);
   await userSeed.seed();
-  console.log('Admin');
 
   const categoriesSeed = app.get(CategoriesSeed);
   await categoriesSeed.seed();
-  console.log('categories..')
 
   const productsSeed = app.get(ProductsSeed);
   await productsSeed.seed();
-  console.log('Products..')
 
   await app.listen(3000);
 }

@@ -16,9 +16,6 @@ export class AuthService {
     ){
 
     }
-    getAuth() {
-        return 'get Auth';
-    }
 
     async validateUser(email: string , password: string){
         const user = await this.userRepository.findByEmail(email);
@@ -60,7 +57,6 @@ export class AuthService {
             sub: dbUser.id,
             id: dbUser.id,
             email: dbUser.email,
-            // roles:[dbUser.isAdmin === Role.Admin ? Role.Admin : Role.User]
             roles:[dbUser.isAdmin]
             
         }

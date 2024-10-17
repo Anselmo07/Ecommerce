@@ -17,6 +17,7 @@ import { FileInterceptor } from "@nestjs/platform-express";
 export class UsersController {
     constructor(private readonly usersService: UsersService, private readonly cloudinaryService: CloudinaryService ){}
 
+    @ApiBearerAuth()
     @Get()
     @HttpCode(HttpStatus.OK)
     @Roles(Role.Admin)
@@ -37,12 +38,6 @@ export class UsersController {
         return this.usersService.getUsersById(id);
     }
 
-    @Post()
-    @HttpCode(HttpStatus.CREATED)
-    createUsers(@Body() user: CreateUserDto ): Promise<Users>{
-        return this.usersService.createUsers(user);
-    }
-
     @ApiBearerAuth()
     @Put(':id')
     @UseGuards(AuthGuard)
@@ -50,6 +45,7 @@ export class UsersController {
         return this.usersService.updateUsers(String(id), user);
     }
 
+    @ApiBearerAuth()
     @Delete(':id')
     @UseGuards(AuthGuard)
     deleteUsers(@Param('id', UUIDValidationPipe) id: string){

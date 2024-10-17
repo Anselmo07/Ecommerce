@@ -3,7 +3,7 @@ import { UUIDValidationPipe } from "src/validator/uuid-validation.pipe";
 import { FilesService } from "./files.service";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ProductsService } from "src/Products/products.service";
-import { ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { AuthGuard } from "src/Auth/auth.guard";
 import { MaxSizeValidatorPipe } from "src/validator/max-size-validator";
 import { CloudinaryService } from "src/Cloudinary/cloudinary.service";
@@ -13,6 +13,7 @@ import { CloudinaryService } from "src/Cloudinary/cloudinary.service";
 export class FileController{
     constructor(private readonly fileService: FilesService, private readonly productsService: ProductsService,  private readonly cloudinaryService: CloudinaryService){}
     
+    @ApiBearerAuth()
     @Post('/uploadImage/:id')
     @UseGuards(AuthGuard)
     @UseInterceptors(FileInterceptor('image'))

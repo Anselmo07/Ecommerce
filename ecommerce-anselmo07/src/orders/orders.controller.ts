@@ -4,7 +4,7 @@ import { Orders } from "src/entity/orders.entity";
 import { CreateOrderDto } from "src/DTO/CreateOrderDto";
 import { UUIDValidationPipe } from "src/validator/uuid-validation.pipe";
 import { AuthGuard } from "src/Auth/auth.guard";
-import { ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 
 @ApiTags('Orders')
 @Controller("orders")
@@ -16,6 +16,7 @@ export class OrdersController{
         return this.ordersService.getsOrder();
     }
 
+    @ApiBearerAuth()
     @Get(':id')
     @HttpCode(HttpStatus.OK)
     @UseGuards(AuthGuard)
@@ -29,6 +30,7 @@ export class OrdersController{
         return this.ordersService.addOrder(orderData.userId, orderData.products);
     }
 
+    @ApiBearerAuth()
     @Delete(':id')
     deleteOrder(@Param('id', UUIDValidationPipe)id: string){
         return this.ordersService.deleteOrder(id)

@@ -6,17 +6,18 @@ import { UUIDValidationPipe } from 'src/validator/uuid-validation.pipe';
 import { Roles } from 'src/decorators/roles.decorator';
 import { Role } from 'src/Auth/roles.enum';
 import { RolesGuard } from 'src/Auth/roles.guard';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Products')
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
   @Get()
-  getProducts() {
-    return this.productsService.getProducts();
+  async getProducts() {
+    return await this.productsService.getProducts();
   }
 
+  @ApiBearerAuth()
   @Get(':id')
   @Roles(Role.Admin)
   @UseGuards(AuthGuard, RolesGuard)
@@ -24,12 +25,14 @@ export class ProductsController {
     return this.productsService.getProductsById(id);
   }
 
+  @ApiBearerAuth()
   @Post()
   @UseGuards(AuthGuard)
   createProducts(@Body() products: Products):Promise<Products>{
     return this.productsService.createProducts(products);
   }  
   
+  @ApiBearerAuth()
   @Put()
   @UseGuards(AuthGuard)
   @UseGuards(AuthGuard)
@@ -37,6 +40,7 @@ export class ProductsController {
     return this.productsService.updateProducts(String(id), products);
   }
 
+  @ApiBearerAuth()
   @Delete(':id')
   @UseGuards(AuthGuard)
   deleteProductsById(@Param('id', UUIDValidationPipe)id: string){

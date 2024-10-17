@@ -13,8 +13,8 @@ export class UsersSeed {
 
         const existingAdmin = await userRepository.findOneBy({ email: 'anselmo@gmail.com' });
         if (existingAdmin) {
-        console.log('El usuario admin ya existe.');
-        return;
+
+        return "El usuario admin ya existe";
         }
 
         const hashedPassword = await bcrypt.hash('Anselmo123*', 10);
@@ -31,6 +31,5 @@ export class UsersSeed {
         });
 
         await userRepository.save(adminUser);
-        console.log('Usuario admin creado exitosamente.');
     }
 }
