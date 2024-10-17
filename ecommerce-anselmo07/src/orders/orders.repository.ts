@@ -49,7 +49,7 @@ export class OrdersRepository{
         orderDetail.price = parseFloat(totalPrice.toFixed(2)); // Asignar el precio total al detalle del pedido
         await this.orderDetailsRepository.save(orderDetail);
     
-        order.orderDetails = orderDetail; // Asignar el detalle del pedido a la orden
+        order.orderDetails = orderDetail; // Asignar el detalle del pedido a la ordenn
         await this.ordersRepository.save(order);
     
         return order;
