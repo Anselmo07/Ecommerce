@@ -67,7 +67,7 @@ export class OrdersRepository{
 
     
     async getsOrder(): Promise<Orders[]>{
-        return this.ordersRepository.find();
+        return this.ordersRepository.find({relations:['orderDetails', 'orderDetails.products',]});
     }
 
     async deleteOrder(id:string):Promise<void>{

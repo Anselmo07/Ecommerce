@@ -7,11 +7,10 @@ import { CloudinaryService } from "src/Cloudinary/cloudinary.service";
 
 @Injectable()
 export class FilesService {
-    constructor(@InjectRepository(File) private readonly filesRepository: Repository<File>, private readonly cloudinaryService: CloudinaryService,
+    constructor(@InjectRepository(File) private readonly filesRepository: Repository<File>, 
+    private readonly cloudinaryService: CloudinaryService,
     @InjectRepository(Products) private readonly productsRepository: Repository<Products>
-){
-
-    }
+){}
 
     async uploadImageToCloudinaryAndSaveProduct(file: Express.Multer.File, productId: string) {
 
@@ -23,7 +22,20 @@ export class FilesService {
         }
 
         product.imgUrl = uploadResult.secure_url;
+        const updatedProduct = await this.productsRepository.save(product);
 
-        return this.productsRepository.save(product);
+        const newFile = this.filesRepository.create({
+            name: file.originalname,
+            mimeType: file.mimetype,
+            data: file.buffer,
+        });
+
+        const savedFile = await this.filesRepository.save(newFile);
+
+        return {
+            message: 'Imagen subida y archivo guardado correctamente',
+            product: updatedProduct,
+            file: savedFile,
+        };
     }
 }

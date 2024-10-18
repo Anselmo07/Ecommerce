@@ -9,7 +9,7 @@ export class ProductsRepository {
 ){}
 
     async getProducts(): Promise<Products[]> {
-        return this.productsRepository.find();
+        return this.productsRepository.find({relations:['category_id']});
     }
 
     async getProductsById(id: string): Promise<Products>{
