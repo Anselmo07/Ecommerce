@@ -34,22 +34,22 @@ export class OrdersRepository{
     
             if (!product) throw new Error("El producto no tiene más stock");
     
-            product.stock -= 1; // Reducir el stock del producto
+            product.stock -= 1; 
             await this.productsRepository.save(product);
             
-            orderDetail.products.push(product); // Añadir el producto al detalle del pedido
+            orderDetail.products.push(product); 
     
-            const productPrice = parseFloat(product.price.toString()); // Convertir el precio del producto y acumularlo en el total
+            const productPrice = parseFloat(product.price.toString()); 
             if (isNaN(productPrice)) {
                 throw new Error('El precio del producto no es válido');
             }
             totalPrice += productPrice;
         }
     
-        orderDetail.price = parseFloat(totalPrice.toFixed(2)); // Asignar el precio total al detalle del pedido
+        orderDetail.price = parseFloat(totalPrice.toFixed(2)); 
         await this.orderDetailsRepository.save(orderDetail);
     
-        order.orderDetails = orderDetail; // Asignar el detalle del pedido a la ordenn
+        order.orderDetails = orderDetail; 
         await this.ordersRepository.save(order);
     
         return order;

@@ -18,12 +18,12 @@ export class FileController{
     @Post('/uploadImage/:id')
     @UseGuards(AuthGuard)
     @UseInterceptors(FileInterceptor('image'))
-    @ApiConsumes('multipart/form-data') // Indicar que acepta multipart/form-data
+    @ApiConsumes('multipart/form-data')
     @ApiBody({
         schema: {
         type: 'object',
         properties: {
-            image: { type: 'string', format: 'binary' }, // Campo para subir imagen
+            image: { type: 'string', format: 'binary' }, 
         },
         },
     })

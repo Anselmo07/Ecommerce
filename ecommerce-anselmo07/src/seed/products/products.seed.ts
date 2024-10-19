@@ -20,7 +20,7 @@ export class ProductsSeed {
     if (!foundCategory) {
         throw new Error(`Category ${category} not found`);
     }
-    return foundCategory;  // Retornar solo el ID
+    return foundCategory;
 }
 
 async seed() {
@@ -36,7 +36,7 @@ async seed() {
             product.price = productData.price;
             product.stock = productData.stock;
             const category = await this.findCategoryByName(productData.category);
-            product.category_id = category;  // Guardas solo el ID
+            product.category_id = category; 
             await this.productRepository.save(product);
 
         }

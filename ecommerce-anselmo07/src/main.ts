@@ -20,7 +20,7 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig, {
-    extraModels: [File], // Asegúrate de incluir modelos adicionales
+    extraModels: [File],
   });
   SwaggerModule.setup('api', app, document);
 

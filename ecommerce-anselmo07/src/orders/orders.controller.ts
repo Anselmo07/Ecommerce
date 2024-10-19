@@ -11,6 +11,7 @@ import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 export class OrdersController{
     constructor(private readonly ordersService: OrdersService){}
 
+    @ApiBearerAuth()
     @Get()
     getsOrder():Promise<Orders[]>{
         return this.ordersService.getsOrder();
