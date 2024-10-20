@@ -9,8 +9,8 @@ import { MaxSizeValidatorPipe } from "src/validator/max-size-validator";
 import { Roles } from "src/decorators/roles.decorator";
 import { Role } from "src/Auth/roles.enum";
 import { RolesGuard } from "src/Auth/roles.guard";
-import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
-import { FileInterceptor } from "@nestjs/platform-express";
+import { ApiBearerAuth, ApiBody, ApiTags, PartialType } from "@nestjs/swagger";
+import { UserUpdateDto } from "src/DTO/UserUpdateDto";
 
 @ApiTags('Users')
 @Controller("users")
@@ -41,7 +41,7 @@ export class UsersController {
     @ApiBearerAuth()
     @Put(':id')
     @UseGuards(AuthGuard)
-    updateUsers(@Param('id', UUIDValidationPipe)id: string , @Body() user: Partial<CreateUserDto>):Promise<Users>{
+    updateUsers(@Param('id', UUIDValidationPipe)id: string , @Body() user: UserUpdateDto):Promise<Users>{
         return this.usersService.updateUsers(String(id), user);
     }
 

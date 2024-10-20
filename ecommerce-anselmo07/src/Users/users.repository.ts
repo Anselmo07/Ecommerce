@@ -28,7 +28,6 @@ export class UsersRepository {
         const user = await this.usersRepository.findOne({
             where: { id },
             relations: ['orders_id'],
-            select:['id', 'name','email', 'orders_id']
         });
 
         if (!user) {

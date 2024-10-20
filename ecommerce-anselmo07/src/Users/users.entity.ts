@@ -37,7 +37,9 @@ export class Users {
     @ApiProperty()
     city: string;
 
-    @OneToMany(() => Orders, (order)=> order.user_id)
+    @OneToMany(() => Orders, (order)=> order.user_id, {
+        onDelete:'CASCADE'
+    })
     @ApiProperty()
     orders_id?: Orders[];
 

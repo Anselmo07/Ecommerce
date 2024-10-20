@@ -16,7 +16,9 @@ export class OrderDetails{
     ,})
     price: number;
 
-    @OneToOne(() => Orders, (order) => order.orderDetails)
+    @OneToOne(() => Orders, (order) => order.orderDetails, {
+        onDelete: 'CASCADE'
+    })
     @JoinColumn({name: 'order_id'})
     @ApiProperty()
     order: Orders;
