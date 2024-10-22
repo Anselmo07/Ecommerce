@@ -27,7 +27,7 @@ export class UsersRepository {
     async getById(id: string):Promise<Users> {
         const user = await this.usersRepository.findOne({
             where: { id },
-            relations: ['orders_id'],
+            relations: ['orders_id', 'orders_id.orderDetails', 'orders_id.orderDetails.products'],
         });
 
         if (!user) {
@@ -41,7 +41,7 @@ export class UsersRepository {
 
         return {
             ...user,
-            ...orders,
+
         };
     }
 

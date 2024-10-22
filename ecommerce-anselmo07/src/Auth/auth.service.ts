@@ -17,17 +17,18 @@ export class AuthService {
 
     }
 
-    async validateUser(email: string , password: string){
-        const user = await this.userRepository.findByEmail(email);
+    // async validateUser(email: string , password: string){
+    //     const user = await this.userRepository.findByEmail(email);
 
-        if (!user || user.password !== password){
-            return null;
-        }
+    //     if (!user || user.password !== password){
+    //         return null;
+    //     }
 
-        return user;
-    }
+    //     return user;
+    // }
 
     async signUp (user: CreateUserDto){
+
         const emailUser = await this.userRepository.findByEmail(user.email);
         if(emailUser){
             throw new BadRequestException('Email already exist');

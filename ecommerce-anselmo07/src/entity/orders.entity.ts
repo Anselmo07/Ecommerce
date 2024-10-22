@@ -10,7 +10,9 @@ export class Orders{
     @ApiProperty()
     id: string = uuid();
 
-    @ManyToOne(()=> Users,(users)=> users.orders_id)
+    @ManyToOne(()=> Users,(users)=> users.orders_id,{
+        onDelete:'CASCADE',
+    })
     @JoinColumn({name: 'user_id'})
     @ApiProperty()
     user_id:Users;

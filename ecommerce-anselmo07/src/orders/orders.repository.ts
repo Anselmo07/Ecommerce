@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { OrderDetails } from "src/entity/orderDetails.entity";
 import { Orders } from "src/entity/orders.entity";
@@ -32,7 +32,7 @@ export class OrdersRepository{
                 where: { id, stock: MoreThan(0) },
             });
     
-            if (!product) throw new Error("El producto no tiene más stock");
+            if (!product) throw new BadRequestException("El producto no tiene más stock");
     
             product.stock -= 1; 
             await this.productsRepository.save(product);

@@ -38,6 +38,7 @@ export class Users {
     city: string;
 
     @OneToMany(() => Orders, (order)=> order.user_id, {
+        cascade: true,
         onDelete:'CASCADE'
     })
     @ApiProperty()
