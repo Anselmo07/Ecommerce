@@ -11,11 +11,7 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 @ApiTags('Products')
 @Controller('products')
 export class ProductsController {
-  constructor(private readonly productsService: ProductsService) {}
-  @Get()
-  async getProducts() {
-    return await this.productsService.getProducts();
-  }
+  constructor(private readonly productsService: ProductsService) {}  
 
   @ApiBearerAuth()
   @Get(':id')
@@ -45,5 +41,4 @@ export class ProductsController {
   deleteProductsById(@Param('id', UUIDValidationPipe)id: string){
     return this.productsService.deleteProductsById(String(id));
   }
-
 }

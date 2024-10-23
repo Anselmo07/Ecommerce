@@ -16,7 +16,7 @@ import { UserUpdateDto } from "src/DTO/UserUpdateDto";
 @Controller("users")
 export class UsersController {
     constructor(private readonly usersService: UsersService, private readonly cloudinaryService: CloudinaryService ){}
-
+    
     @ApiBearerAuth()
     @Get()
     @HttpCode(HttpStatus.OK)
@@ -52,5 +52,4 @@ export class UsersController {
         return this.usersService.deleteUsersById(id);
     }
 
-    
 }

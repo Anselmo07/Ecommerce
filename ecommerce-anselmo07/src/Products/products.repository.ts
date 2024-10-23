@@ -2,6 +2,8 @@ import { Injectable, NotFoundException} from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Products } from "./products.entity";
 import { Repository } from "typeorm";
+import { filter } from "rxjs";
+import { Categories } from "src/entity/categories.entity";
 
 @Injectable()
 export class ProductsRepository {
@@ -38,4 +40,5 @@ export class ProductsRepository {
             throw new NotFoundException(`El producto con ${id} no se encontro`);
         }
     }
+
 }
