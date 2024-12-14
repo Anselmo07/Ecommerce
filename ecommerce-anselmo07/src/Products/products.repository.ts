@@ -4,6 +4,7 @@ import { Products } from "./products.entity";
 import { Repository } from "typeorm";
 import { filter } from "rxjs";
 import { Categories } from "src/entity/categories.entity";
+import { Orders } from "src/entity/orders.entity";
 
 @Injectable()
 export class ProductsRepository {
