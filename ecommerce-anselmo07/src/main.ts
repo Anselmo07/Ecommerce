@@ -12,6 +12,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   app.use(loggerGloblal);
+  app.setGlobalPrefix('API');
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('My Ecommerce')
@@ -35,6 +36,6 @@ async function bootstrap() {
 
   const port = process.env.PORT || 3000; 
   await app.listen(port);
-  console.log(`Application is running on: http://localhost:${port}`);
+  console.log(`Application is running on: http://localhost:${port}/API`);
 }
 bootstrap();
