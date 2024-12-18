@@ -14,6 +14,9 @@ const config = {
     password: process.env.DB_PASSWORD,
     entities:[__dirname + '/../**/*.entity{.ts,.js}'],
     migrations:['dist/migrations/*{.js,.ts}'],
+    ssl: {
+        rejectUnauthorized: false,  // A veces se puede necesitar para ciertas configuraciones de PostgreSQL
+    },
     synchronize: false, // TRUE
     logging: false,
     dropSchema: false,
