@@ -89,7 +89,7 @@
   },
   "proxy": {
     "/API": {
-      "target": "http://localhost:3000",
+      "target": "https://ecommerce-00vc.onrender.com",
       "pathRewrite": { "^/API": "" }
     }
   }
